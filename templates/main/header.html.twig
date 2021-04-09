@@ -1,0 +1,64 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+<div class="ui inverted vertical header center aligned segment">
+    <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+            <a class="toc item">
+                <i class="sidebar icon"></i>
+            </a>
+            <a href="{{ path('homepage') }}" class="item {{ currentPath == path('homepage') ? 'active' : '' }}">Home</a>
+            <a class="item">Work</a>
+            <a class="item">Company</a>
+            <a class="item">Careers</a>
+
+            <div class="right item">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a href="{{ path('app_logout') }}" class="ui inverted button">Logout</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="ui inverted button">Log in</a>
+                    <a href="{{ path('app_register') }}" class="ui inverted button">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Following Menu -->
+<div class="ui large top fixed hidden menu">
+    <div class="ui container">
+        <a href="{{ path('homepage') }}" class="item {{ currentPath == path('homepage') ? 'active' : '' }}">Home</a>
+        <a class="item">Work</a>
+        <a class="item">Company</a>
+        <a class="item">Careers</a>
+        <div class="right menu">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <div class="item">
+                    <a href="{{ path('app_logout') }}" class="ui  button">Logout</a>
+                </div>
+            {% else %}
+                <div class="item">
+                    <a href="{{ path('app_login') }}" class="ui  button">Log in</a>
+                </div>
+                <div class="item">
+                    <a href="{{ path('app_register') }}" class="ui primary button">Sign Up</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu">
+    <a href="{{ path('homepage') }}" class="item {{ currentPath == path('homepage') ? 'active' : '' }}">Home</a>
+    <a class="item">Work</a>
+    <a class="item">Company</a>
+    <a class="item">Careers</a>
+
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ path('app_logout') }}" class="item">Logout</a>
+    {% else %}
+        <a href="{{ path('app_login') }}" class="item">Login</a>
+        <a href="{{ path('app_register') }}" class="item">Sign Up</a>
+    {% endif %}
+
+</div>
